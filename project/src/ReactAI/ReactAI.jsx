@@ -47,7 +47,7 @@ import Draggable from "react-draggable";
 import Canvas from "../DraggableList"
 import { parse } from 'html-parse-stringify2';
 
-import server from "../serverConfig.js"
+import server, { blob_base_url } from "../serverConfig.js"
 
 
 
@@ -224,7 +224,8 @@ const ReactAI = () => {
   const [draggable, setDraggable] = useState(false)
 
   // Component Lists
-  let imgLocation = 'https://socialwebappblobs.blob.core.windows.net/blobs/'
+  let imgLocation = blob_base_url
+  // let imgLocation = 'https://socialwebappblobs.blob.core.windows.net/blobs/'
   const [gitIMGs, setGitIMGs] = useState(
     [
       // Navbars

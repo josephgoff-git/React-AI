@@ -7,7 +7,7 @@ import axios from "axios";
 import JSZip from 'jszip';
 import { openDatabase } from "../fileUtils.js"
 import { useProjectTitleStore, useClickedNewAppStore, useHasFilesStore, useShowEditorStore, useShowGPTStore, useShowUploadStore, useFirstBuildStore, useDisplayColorStore } from "../activitiesStore"
-import server from "../serverConfig.js"
+import server, { blob_base_url } from "../serverConfig.js"
 
 function Upload() {
     var hasFiles = useHasFilesStore((state) => state.hasFiles);
@@ -35,10 +35,8 @@ function Upload() {
     const setDisplayColor = useDisplayColorStore((state) => state.setDisplayColor);
    
   
-    // let image1 = "https://reactaiblobs.blob.core.windows.net/reactaistorage/replicate.png"
+    let image1 = blob_base_url + "upload.PNG"
 
-    let image1 = "https://socialwebappblobs.blob.core.windows.net/blobs/upload.PNG"
-    // let image1 = "https://socialwebappblobs.blob.core.windows.net/blobs/welcome.PNG"
     const [progress, setProgress] = useState(0);
     const [isUploading, setIsUploading] = useState(false)
     const [openProject, setOpenProject] = useState("Open Project")

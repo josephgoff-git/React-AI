@@ -1,0 +1,271 @@
+@import url("https://fonts.googleapis.com/css2?family=Alegreya+Sans:wght@100;300;400;500;700;800;900&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Alegreya Sans", sans-serif;
+}
+
+.line-bar-decoration {
+  border-top: 2px solid white;
+}
+
+#app {
+  width: 100vw;
+  height: 100vh;
+  height: -webkit-fill-available;
+  /* background: #343541; */
+  background: black;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+#chat_container {
+  flex: 1;
+  width: 100%;
+  height: 100%;
+  overflow-y: scroll;
+
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+
+  padding-bottom: 20px;
+  scroll-behavior: smooth;
+}
+
+/* hides scrollbar */
+#chat_container::-webkit-scrollbar {
+  display: none;
+}
+
+.wrapper {
+  width: 100%;
+  padding: 15px;
+}
+
+.ai {
+  /* background: #40414F; */
+  background: rgb(32, 32, 32);
+}
+
+.chat {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.profile {
+  width: 36px;
+  height: 36px;
+  border-radius: 5px;
+
+  /* background: #5436DA; */
+  background: transparent;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.ai .profile {
+  /* background: #10a37f; */
+  background: transparent
+}
+
+.profile img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.message {
+  flex: 1;
+
+  /* color: #dcdcdc; */
+  color: white;
+  font-size: 20px;
+
+  max-width: 100%;
+  overflow-x: scroll;
+  margin-top: 5px;
+  padding-bottom: 5px;
+  margin-left: 3px;
+
+  /*
+   * white space refers to any spaces, tabs, or newline characters that are used to format the CSS code
+   * specifies how white space within an element should be handled. It is similar to the "pre" value, which tells the browser to treat all white space as significant and to preserve it exactly as it appears in the source code.
+   * The pre-wrap value allows the browser to wrap long lines of text onto multiple lines if necessary.
+   * The default value for the white-space property in CSS is "normal". This tells the browser to collapse multiple white space characters into a single space, and to wrap text onto multiple lines as needed to fit within its container.
+  */
+  white-space: pre-wrap; 
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* hides scrollbar */
+.message::-webkit-scrollbar {
+  display: none;
+}
+
+form {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 10px;
+  /* background: #40414F; */
+  border-top: 1px solid white;
+
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+
+textarea {
+  width: 100%;
+
+  /* color: #fff; */
+  color: white;
+  font-size: 18px;
+
+  padding: 10px;
+  background: transparent;
+  border-radius: 5px;
+  border: none;
+  outline: none;
+}
+
+button {
+  outline: 0;
+  border: 0;
+  cursor: pointer;
+  background: transparent;
+}
+
+form img {
+  width: 30px;
+  height: 30px;
+}
+
+.file-item:hover p {
+    opacity: 0.7;
+}
+
+.file-x:hover {
+  opacity: 0.9;
+}
+
+.hide-scroll::-webkit-scrollbar {
+  height: 0; /* Remove height of the scrollbar */
+}
+
+.hide-scroll::-webkit-scrollbar-thumb {
+  background-color: transparent; /* Make the thumb transparent */
+}
+
+.hide-scroll::-webkit-scrollbar-track {
+  background-color: transparent; /* Make the track transparent */
+}
+
+.tree-item:hover {
+  opacity: 0.7;
+}
+
+.hover-dim:hover {
+  opacity: 0.7;
+  cursor: pointer;
+}
+
+.hover-dim2:hover {
+  background-color: #999 !important;
+  cursor: pointer;
+}
+
+.hover-dim2:hover > #deleteComponent {
+  opacity: 1 !important;
+}
+
+.component-item:hover > #deleteComponent {
+  opacity: 1 !important;
+  pointer-events: all !important;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 6px;
+  background-color: #f0f0f0;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.progress {
+  height: 100%;
+  background-color: rgb(33, 200, 255); 
+  transition: width 0.3s ease-in-out;
+  position: relative;
+}
+
+
+.select-none {
+  -webkit-user-select: none !important; /* Safari */        
+  -moz-user-select: none !important; /* Firefox */
+  -ms-user-select: none !important; /* IE10+/Edge */
+  user-select: none !important; /* Standard */
+}
+
+.select-none-fix {
+  -webkit-user-select: all !important; /* Safari */        
+  -moz-user-select: all !important; /* Firefox */
+  -ms-user-select: all !important; /* IE10+/Edge */
+  user-select: all !important; /* Standard */
+}
+
+
+
+
+/* 
+.container {
+  position: relative;
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+}
+
+.left,
+.right {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  transition: all 0.3s ease;
+}
+
+.left {
+  background-color: #f0f0f0;
+}
+
+.right {
+  background-color: #e0e0e0;
+  right: 0;
+}
+
+.middle-bar {
+  position: absolute;
+  width: 4px;
+  height: 100%;
+  background-color: white;
+  cursor: ew-resize;
+  z-index: 1;
+} */

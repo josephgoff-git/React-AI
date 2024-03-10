@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>React Project Folder Uploader</title>
+</head>
+<body>
+  <h1>Upload a React Project Folder</h1>
+  <input type="file" id="projectInput" webkitdirectory directory multiple />
+  <button id="uploadButton">Upload</button>
+  <p id="displayProgress"></p>
+  <button id="buildButton">Build Project</button>
+  <button id="goToMain">Go to main page</button>
+
+  <script>
+    // const Babel = require('@babel/standalone');
+    document.addEventListener('DOMContentLoaded', async () => {
+      const uploadButton = document.getElementById('uploadButton');
+      const projectInput = document.getElementById('projectInput');
+      const displayProgress = document.getElementById('displayProgress');
+      const buildButton = document.getElementById('buildButton');
+      const goToMain = document.getElementById('goToMain');
+
+      goToMain.addEventListener('click', () => {
+        window.location.href = "/"
+      })
+
+      uploadButton.addEventListener('click', async () => {
+        indexedDB.deleteDatabase("ReactProjectsDatabase");
+        console.log("Deleted database");
+
+        const db = await openDatabase(); // Open or create the database
+        const transaction = db.transaction('files', 'readwrite');
+        const objectStore = transaction.objectStore('files');
+        await objectStore.clear();
+        console.log("Cleared database");
+
+        const files = projectInput.files;
+
+        if (!files.length) {
+          alert('Please select a folder to upload.');
+          return;
+        }
+
+        // Store files in IndexedDB
+        await storeFiles(files);
+        displayProgress.innerHTML = "Successfully stored project in IndexedDB!"
+      });
+
+      buildButton.addEventListener('click', async () => {
+        console.log("Build")
+
+        // const storedFiles = await retrieveFilePaths();
+        // console.log('Retrieved Files:', storedFiles.length);
+
+        // console.log(Array.from(storedFiles).slice(0, 10));
+        const targetFilePath = 'react-app/node_modules/react/index.js'; // Adjust this to the desired file path
+        try {
+          // const storedFiles = await retrieveFilePaths();
+          // console.log('Retrieved Files:', storedFiles.length);
+
+          // const fileContent = await retrieveCodeByFilePath(targetFilePath);
+          // console.log('Retrieved file content:', fileContent);
+          const files = await retrieveFilePaths();
+          console.log(files.length)
+          
+          // You can now use the retrieved file content as needed
+        } catch (error) {
+          console.error('Error retrieving file:', error);
+        }
+      })
+    });
+
+    async function openDatabase() {
+      return new Promise((resolve, reject) => {
+        const request = indexedDB.open('ReactProjectsDatabase', 1);
+
+        request.onerror = event => {
+          reject('Error opening database');
+        };
+
+        request.onsuccess = event => {
+          const db = event.target.result;
+          resolve(db);
+        };
+
+        request.onupgradeneeded = event => {
+          const db = event.target.result;
+          db.createObjectStore('files', { keyPath: 'filepath' });
+          console.log("Created object store `files`");
+        };
+      });
+    }
+
+    async function storeFiles(files) {
+      let filesList = Array.from(files)
+      for (let i = 0; i < filesList.length; i += 1000) {
+        let filesChunk = filesList.slice(i, i + 1000);
+        await Promise.all(filesChunk.map(file => storeFile(file)));
+        const displayProgress = document.getElementById('displayProgress');
+        displayProgress.innerHTML = "Succesfully uploaded " + i + " files";
+      }
+    }
+
+    async function storeFile(file) {
+      return new Promise(async (resolve, reject) => {
+        const fileReader = new FileReader();
+        fileReader.onload = async event => {
+          try {
+            const fileContent = event.target.result;
+            const blob = new Blob([fileContent], { type: file.type });
+
+            const fileData = {
+              filename: file.name,
+              filepath: file.webkitRelativePath,
+              content: blob, // Store Blob directly
+            };
+
+            if (fileData.filepath.startsWith('react-project/node_modules/')) {
+              console.log(1)
+            }
+
+            const db = await openDatabase(); // Open or create the database
+            const transaction = db.transaction('files', 'readwrite');
+            const objectStore = transaction.objectStore('files');
+            await objectStore.put(fileData);
+            resolve();
+          } catch (e) {
+            reject(e);
+          }
+        };
+
+        fileReader.readAsArrayBuffer(file);
+      });
+    }    
+
+    async function retrieveFilePaths() {
+      return new Promise(async (resolve, reject) => {
+        const db = await openDatabase(); // Open or create the database
+        const transaction = db.transaction('files', 'readonly');
+        const objectStore = transaction.objectStore('files');
+        const request = objectStore.getAllKeys();
+
+        request.onsuccess = event => {
+          const storedFiles = event.target.result;
+          resolve(storedFiles);
+        };
+
+        request.onerror = event => {
+          reject('Error retrieving files');
+        };
+      });
+    }
+
+    async function retrieveCodeByFilePath(filepath) {
+      return new Promise(async (resolve, reject) => {
+        const db = await openDatabase(); // Open or create the database
+        const transaction = db.transaction('files', 'readonly');
+        const objectStore = transaction.objectStore('files');
+        const request = objectStore.get(filepath);
+        console.log("FILEPATH:", filepath)
+
+        request.onsuccess = event => {
+          console.log(event.target.result)
+          const storedFile = event.target.result;
+          if (storedFile) {
+            console.log(storedFile.content);
+            resolve(storedFile.content);
+          } else {
+            reject('File not found');
+          }
+        };
+
+        request.onerror = event => {
+          reject('Error retrieving file');
+        };
+      });
+    }
+
+
+  </script>
+</body>
+</html>

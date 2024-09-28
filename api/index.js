@@ -194,7 +194,7 @@ app.get('/github-proxy', async (req, res) => {
 
 // Get Message
 app.post('/gpt-message', async (req, res) => {
-  console.log("GPT MESSAGE")
+  // console.log("GPT MESSAGE")
   const messages = req.body.messages
   const apiKey = process.env.OPENAI_API_KEY; 
   async function getMessage(messages) {

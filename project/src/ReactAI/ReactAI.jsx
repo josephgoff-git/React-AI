@@ -413,7 +413,7 @@ const ReactAI = () => {
       onClick={async ()=>{
         await handleClickedElementNode(path, "", 0)
       }} 
-      style={{color: currentElementPath === path? "rgb(33, 220, 255)" : "white", marginBottom: "3px", overflow: "hidden", whiteSpace: "nowrap", textOverflow: "ellipsis", fontFamily: "sans-serif", fontSize: "15px"}} key={path}>{removeAsterisks(path.split('/').pop())}</div>; 
+      style={{color: currentElementPath === path? "rgb(33, 220, 255)" : "white", marginBottom: "3px", overflow: "hidden", whiteSpace: "nowrap", textOverflow: "ellipsis", fontFamily: "unset", fontSize: "15px"}} key={path}>{removeAsterisks(path.split('/').pop())}</div>; 
     }
 
     // Render a folder node 
@@ -427,7 +427,7 @@ const ReactAI = () => {
 
     return (
       <div key={path}>
-        <div className="tree-item" style={{color: currentElementPath === path? "rgb(33, 220, 255)" : "white", overflow: "hidden", whiteSpace: "nowrap", textOverflow: "ellipsis", marginBottom: "3px", fontFamily: "sans-serif", display: root? "none" : "block", fontSize: "15px"}}  
+        <div className="tree-item" style={{color: currentElementPath === path? "rgb(33, 220, 255)" : "white", overflow: "hidden", whiteSpace: "nowrap", textOverflow: "ellipsis", marginBottom: "3px", fontFamily: "unset", display: root? "none" : "block", fontSize: "15px"}}  
         onClick={async () => { 
           // if (!root) {handleElementToggle(path)}; 
           await handleClickedElementFolder(path, "", 0)
@@ -1336,9 +1336,10 @@ const ReactAI = () => {
   };
   
   const renderTreeNode = (node, path) => {
+    console.log(path)
     if (typeof node !== 'object' || node === true) {
       // Render a file node
-      return <div className="tree-item" onClick={()=>{handleFileOpen(path)}} style={{color: "white", marginBottom: "3px", paddingBottom: "2px", borderBottom: "0.3px solid #888", overflow: "hidden", whiteSpace: "nowrap", textOverflow: "ellipsis", fontFamily: "sans-serif"}} key={path}>{path.split('/').pop()}</div>; 
+      return <div className="tree-item" onClick={()=>{handleFileOpen(path)}} style={{color: "white", marginBottom: "3px", paddingBottom: "2px", borderBottom: "0.3px solid #888", overflow: "hidden", whiteSpace: "nowrap", textOverflow: "ellipsis", fontFamily: "unset"}} key={path}>{path.split('/').pop()}</div>; 
     }
 
     // Render a folder node
@@ -1348,7 +1349,7 @@ const ReactAI = () => {
     
     return (
       <div key={path}>
-        <div className={root? "" : "tree-item"} style={{overflow: "hidden", whiteSpace: "nowrap", textOverflow: "ellipsis", borderBottom: "0.3px solid #888", marginBottom: "3px", paddingBottom: "2px", fontFamily: "sans-serif", color: root? "#999" : "white", marginLeft: root? "5px" : 0, cursor: root? "auto" : "pointer"}}  onClick={() => handleToggle(path)}>
+        <div className={root? "" : "tree-item"} style={{overflow: "hidden", whiteSpace: "nowrap", textOverflow: "ellipsis", borderBottom: "0.3px solid #888", marginBottom: "3px", paddingBottom: "2px", fontFamily: "unset", color: root? "#999" : "white", marginLeft: root? "5px" : 0, cursor: root? "auto" : "pointer"}}  onClick={() => handleToggle(path)}>
           {root? <></> : isExpanded ? <BsChevronDown color="white" size={12} /> : <BsChevronDown style={{transform: "rotate(-90deg)"}} color="white" size={12} />} {path.split('/').pop()} {/* Display only the folder name */}
         </div>
         {isExpanded && (
@@ -3277,7 +3278,7 @@ const ReactAI = () => {
               <div 
                 className="hover-dim2 select-none" 
                 style={{userSelect: "none", zIndex: 998,marginTop: "5px", cursor: "pointer", width: "110px", marginLeft: "10px", height: "33px", backgroundColor: selectedBuildComponent === currentStack[currentPage][index] ? "#999" :  "white", border:"1px solid black", borderRadius: "7px", display: "flex", justifyContent: "center", alignItems: "center"}}>
-                <p className="select-none" style={{userSelect: "none", color: "black", fontWeight: "bold", fontFamily: "sans-serif"}}>
+                <p className="select-none" style={{userSelect: "none", color: "black", fontWeight: "bold", fontFamily: "unset"}}>
                   {currentStack[currentPage][index]}
                 </p>
               </div>
@@ -3415,7 +3416,7 @@ const ReactAI = () => {
               <div 
                 className="hover-dim2 select-none" 
                 style={{userSelect: "none", zIndex: 998,marginTop: "5px", cursor: "pointer", width: "110px", marginLeft: "10px", height: "33px", backgroundColor: "white", border:"1px solid black", borderRadius: "7px", display: "flex", justifyContent: "center", alignItems: "center"}}>
-                <p className="select-none" style={{userSelect: "none", color: "black", fontWeight: "bold", fontFamily: "sans-serif"}}>
+                <p className="select-none" style={{userSelect: "none", color: "black", fontWeight: "bold", fontFamily: "unset"}}>
                   {pageNames[index]}
                 </p>
               </div>
@@ -5653,7 +5654,7 @@ const ReactAI = () => {
                     onClick={()=>{addPage()}} 
                     className="hover-dim" style={{marginTop: "9px", marginLeft: "10px",cursor: "pointer", width: "calc(100% - 10px)", height: "33px", backgroundColor: "black", border: "1px solid white", borderRadius: "7px", display: "flex", justifyContent: "center", alignItems: "center"}}>
                     <HiPlusSm style={{marginLeft: "-10px", marginTop: "-2px"}} color="white" fontSize={28} />
-                    <p style={{marginLeft: "-3px", color: "white", fontWeight: "bold", fontFamily: "sans-serif"}}>
+                    <p style={{marginLeft: "-3px", color: "white", fontWeight: "bold", fontFamily: "unset"}}>
                       Page
                     </p>
                   </div>
@@ -5668,7 +5669,7 @@ const ReactAI = () => {
                           onClick={()=>{addPage()}} 
                           className="hover-dim" style={{marginTop: "9px", marginLeft: "10px",cursor: "pointer", width: "calc(100% - 10px)", height: "33px", backgroundColor: "black", border: "1px solid white", borderRadius: "7px", display: "flex", justifyContent: "center", alignItems: "center"}}>
                           <HiPlusSm style={{marginLeft: "-10px", marginTop: "-2px"}} color="white" fontSize={28} />
-                          <p style={{marginLeft: "-3px", color: "white", fontWeight: "bold", fontFamily: "sans-serif"}}>
+                          <p style={{marginLeft: "-3px", color: "white", fontWeight: "bold", fontFamily: "unset"}}>
                             Page
                           </p>
                         </div>
@@ -5705,7 +5706,7 @@ const ReactAI = () => {
                     {currentStack[currentPage] && currentStack[currentPage].length === 0? 
                     <div className="hover-dim" onClick={()=>{setSidebar(false)}} style={{marginTop: "10px", marginLeft: "10px", cursor: "pointer", width: "calc(100% - 10px)", height: "33px", backgroundColor: "black", border: "1px solid white", borderRadius: "7px", display: "flex", justifyContent: "center", alignItems: "center"}}>
                       <HiPlusSm style={{marginLeft: "-10px", marginTop: "-3px"}} color="white" fontSize={26} />
-                      <p style={{marginLeft: "-3px", marginTop: "-2px", color: "white", fontWeight: "bold", fontFamily: "sans-serif", fontSize: "14px"}}>
+                      <p style={{marginLeft: "-3px", marginTop: "-2px", color: "white", fontWeight: "bold", fontFamily: "unset", fontSize: "14px"}}>
                         Component
                       </p>
                     </div>
@@ -5717,7 +5718,7 @@ const ReactAI = () => {
                             <DraggableList/>
                             <div className="hover-dim" onClick={()=>{handleSidebar()}} style={{marginTop: "10px", marginLeft: "10px", cursor: "pointer", width: "calc(100% - 10px)", height: "33px", backgroundColor: "black", border: "1px solid white", borderRadius: "7px", display: "flex", justifyContent: "center", alignItems: "center"}}>
                               <HiPlusSm style={{marginLeft: "-10px", marginTop: "-3px"}} color="white" fontSize={26} />
-                              <p style={{marginLeft: "-3px", marginTop: "-2px", color: "white", fontWeight: "bold", fontFamily: "sans-serif", fontSize: "14px"}}>
+                              <p style={{marginLeft: "-3px", marginTop: "-2px", color: "white", fontWeight: "bold", fontFamily: "unset", fontSize: "14px"}}>
                                 Component
                               </p>
                             </div>
@@ -5807,7 +5808,7 @@ const ReactAI = () => {
                           }
                         }}
                         style={{padding: "20px", height: "100%", width: "150px", minWidth: "150px", display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", gap: "3px", backgroundColor: "transparent", borderRight: "0.1px solid white", cursor: "pointer"}}>
-                        <p style={{fontWeight: "bold", userSelect: "none", color: "white", fontSize: "15px", fontFamily: "sans-serif", whiteSpace: "nowrap", textOverflow: "ellipsis"}}>{separateNums(item.component)}</p>
+                        <p style={{fontWeight: "bold", userSelect: "none", color: "white", fontSize: "15px", fontFamily: "unset", whiteSpace: "nowrap", textOverflow: "ellipsis"}}>{separateNums(item.component)}</p>
                         <img style={{width: "100%", maxHeight: "80px", objectFit: "cover", borderRadius: "5px", border: "1px solid white"}} src={gitIMGs[index][index2]? gitIMGs[index][index2].img : gitIMGs[2][3].img} alt=""/>
                     </div>
                     ))}
@@ -5893,7 +5894,7 @@ const ReactAI = () => {
 
               {/* Styles Selector Absolute  */}
               {optionsSelector === "tag" && <div 
-                style={{overflow: "scroll", fontFamily: "sans-serif" , padding: "10px 15px", position: "absolute", top: showAddTextInput? "80px" : "50px", left: "180px", width: "calc(100% - 180px)", height: showAddTextInput? "calc(100% - 80px" : "calc(100% - 50px)", zIndex: 100, backgroundColor: "black", borderTop: "1px solid white"}}>
+                style={{overflow: "scroll", fontFamily: "unset" , padding: "10px 15px", position: "absolute", top: showAddTextInput? "80px" : "50px", left: "180px", width: "calc(100% - 180px)", height: showAddTextInput? "calc(100% - 80px" : "calc(100% - 50px)", zIndex: 100, backgroundColor: "black", borderTop: "1px solid white"}}>
                 {removeAsterisks(currentElementPath.split("/").pop()) !== "Link" && <div style={{color: "white", fontWeight: "600", fontSize: "26px"}}>Styles</div>}
 
                 {/* Link Tag */}
@@ -6000,7 +6001,7 @@ const ReactAI = () => {
                         />
                       </div>
                       <div style={{marginBottom: "15px"}}>{values.length > 0 && values.map((item2, index2) => {
-                        let stringWidth = getStringWidth(removeComments(values[index2].split(":")[0]), "17px", "sans-serif")
+                        let stringWidth = getStringWidth(removeComments(values[index2].split(":")[0]), "17px", "unset")
                         return (
                           <div style={{display: "flex", flexDirection: "row", marginTop: "9px"}}>
                             <div style={{marginRight: "8px"}}>{removeComments(values[index2].split(":")[0])}</div>
@@ -6206,7 +6207,7 @@ const ReactAI = () => {
                         />
                       </div>
                       <div style={{marginBottom: "15px"}}>{values.length > 0 && values.map((item2, index2) => {
-                        let stringWidth = getStringWidth(removeComments(values[index2].split(":")[0]), "17px", "sans-serif")
+                        let stringWidth = getStringWidth(removeComments(values[index2].split(":")[0]), "17px", "unset")
                         return (
                           <div style={{display: "flex", flexDirection: "row", marginTop: "9px"}}>
                             <div style={{marginRight: "8px"}}>{removeComments(values[index2].split(":")[0])}</div>
@@ -6417,7 +6418,7 @@ const ReactAI = () => {
                         />
                       </div>
                       <div style={{marginBottom: "15px"}}>{values.length > 0 && values.map((item2, index2) => {
-                        let stringWidth = getStringWidth(removeComments(values[index2].split(":")[0]), "17px", "sans-serif")
+                        let stringWidth = getStringWidth(removeComments(values[index2].split(":")[0]), "17px", "unset")
                         return (
                           <div style={{display: "flex", flexDirection: "row", marginTop: "9px"}}>
                             <div style={{marginRight: "8px"}}>{removeComments(values[index2].split(":")[0])}</div>
@@ -6623,7 +6624,7 @@ const ReactAI = () => {
                         />
                       </div>
                       <div style={{marginBottom: "15px"}}>{values.length > 0 && values.map((item2, index2) => {
-                        let stringWidth = getStringWidth(removeComments(values[index2].split(":")[0]), "17px", "sans-serif")
+                        let stringWidth = getStringWidth(removeComments(values[index2].split(":")[0]), "17px", "unset")
                         return (
                           <div style={{display: "flex", flexDirection: "row", marginTop: "9px"}}>
                             <div style={{marginRight: "8px"}}>{removeComments(values[index2].split(":")[0])}</div>

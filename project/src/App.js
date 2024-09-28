@@ -5,8 +5,23 @@ import Canvas from "./DraggableList"
 import {useHeightStore, useWidthStore, useXValStore, useYValStore ,  useHasFilesStore, useShowEditorStore, useShowGPTStore, useShowUploadStore, useFirstBuildStore} from "./activitiesStore";
 import { useEffect } from "react";
 import Playground from "./Playground/Playground"
+import App2 from "./App2/App2";
 
 function App() {  
+  return <>
+    <App2 />
+  </>
+
+
+
+
+
+
+
+
+
+
+
   var height = useHeightStore((state) => state.height);
   const setHeight = useHeightStore((state) => state.setHeight);
 

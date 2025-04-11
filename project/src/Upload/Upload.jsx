@@ -35,7 +35,8 @@ function Upload() {
     const setDisplayColor = useDisplayColorStore((state) => state.setDisplayColor);
    
   
-    let image1 = blob_base_url + "upload.PNG"
+    // let image1 = blob_base_url + "upload.PNG"
+    let image1 = "https://images.unsplash.com/photo-1518873890627-d4b177c06e51?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
 
     const [progress, setProgress] = useState(0);
     const [isUploading, setIsUploading] = useState(false)

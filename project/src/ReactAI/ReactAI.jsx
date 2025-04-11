@@ -192,7 +192,7 @@ const ReactAI = () => {
   const [messages, setMessages] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [loading, setLoading] = useState("");
-  const [GPTModel, setGPTModel] = useState("3.5-turbo")
+  const [GPTModel, setGPTModel] = useState("4")
   const [numberOfRenders, setNumberOfRenders] = useState(4)
   const [modelTemperature, setModelTemperature] = useState(0.8)
   
@@ -1867,7 +1867,7 @@ const ReactAI = () => {
     // const proxyUrl = 'https://reactaiserver.azurewebsites.net/gpt-message-editor';
     const proxyUrl = `${server}/gpt-message-editor`
     try {
-      const response = await axios.post(proxyUrl, { message: messages, gpt: "3.5-turbo", temperature: modelTemperature});
+      const response = await axios.post(proxyUrl, { message: messages, gpt: "4", temperature: modelTemperature});
       return response.data
     } catch (error) {
       return 'Something went wrong...'
